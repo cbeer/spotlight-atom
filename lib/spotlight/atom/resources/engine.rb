@@ -4,10 +4,12 @@ module Spotlight
   module Atom
     module Resources
       class Engine < ::Rails::Engine
-        
+        Spotlight::Atom::Resources::Engine.config.resource_partials = ['spotlight/resources/atom/blacklight', 'spotlight/resources/atom/omeka']
         initializer "spotlight.dor.initialize" do
           Spotlight::Engine.config.resource_providers << Spotlight::Resources::OmekaHarvester
           Spotlight::Engine.config.resource_providers << Spotlight::Resources::AtomHarvester
+          Spotlight::Engine.config.new_resource_partials ||= []
+          Spotlight::Engine.config.new_resource_partials << 'spotlight/resources/atom/tabbed_form'
         end
       end
     end

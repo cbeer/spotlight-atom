@@ -1,0 +1,11 @@
+en:
+  spotlight:
+    resources:
+      atom:
+        tabbed_form:
+          omeka: "Omeka"
+          blacklight: "Blacklight"
+        blacklight:
+          add_item: "Import feed"
+        omeka:
+          add_item: "Import feed"
