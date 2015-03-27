@@ -31,7 +31,7 @@ module Spotlight::Resources
           remote_url_url: h[:url],
           data: h,
           exhibit: exhibit
-        )
+        ) if h[:url]
       end
     end
 
