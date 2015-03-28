@@ -78,5 +78,19 @@ module Spotlight::Resources
     def title_field
       Spotlight::Engine.config.upload_title_field || exhibit.blacklight_config.index.title_field
     end
+    
+    def create_sidecars_for *keys
+      missing = keys - exhibit.custom_fields.map { |x| x.label }
+
+      missing.each do |k|
+        exhibit.custom_fields.create! label: k
+      end.tap { @exhibit_custom_fields = nil }
+    end
+
+    def exhibit_custom_fields
+      @exhibit_custom_fields ||= exhibit.custom_fields.each_with_object({}) do |value, hash|
+        hash[value.label] = value
+      end
+    end
   end
 end
