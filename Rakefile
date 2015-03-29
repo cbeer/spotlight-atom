@@ -7,6 +7,19 @@ require 'jettywrapper'
 require 'engine_cart/rake_task'
 EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
 
+task default: :ci
+
+task :ci => ['engine_cart:generate', 'jetty:clean', 'configure_jetty'] do
+  ENV['environment'] = "test"
+  jetty_params = Jettywrapper.load_config
+  jetty_params[:startup_wait]= 60
+
+  Jettywrapper.wrap(jetty_params) do
+    # run the tests
+    Rake::Task["spec"].invoke
+  end
+end
+
 task :configure_jetty do
   FileList['solr_conf/conf/*'].each do |f|  
     cp("#{f}", 'jetty/solr/blacklight-core/conf/', :verbose => true)
