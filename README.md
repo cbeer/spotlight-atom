@@ -7,7 +7,7 @@ Harvest resources in Atom feeds into a Spotlight exhibit
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'spotlight-atom-resources'
+gem 'spotlight-atom'
 ```
 
 And then execute:
